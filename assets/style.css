@@ -1,0 +1,30 @@
+body{
+    background-color: bisque;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 3%;
+    padding-right: 3%;
+    margin-bottom: 50px;
+    height: 20vh;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 30vh;
+}
+
+section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(gray, white);
+    border: 2px solid black;
+    padding: 5%;
+}
