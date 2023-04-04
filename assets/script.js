@@ -1,9 +1,9 @@
 let mainEl = document.querySelector(".main");
 let timeE1 = document.querySelector(".timer");
 let btnEl = document.querySelector("#start");
-let start = true
-
 let options =  document.querySelector(".options");
+
+let count = []
 
 let randomFlag = " "
 let imgSrc = [
@@ -95,11 +95,31 @@ let imgSrc = [
         {c: "Portugal", isCorrect: false},
         {d: "Belgium", isCorrect: false},
     ],
-    }
+    },
+
+    {
+    country: "assets/images/750px-Flag_of_Argentina_(3-2).svg.png",
+    answers: [
+        {a: "Bolivia", isCorrect: false},
+        {b: "Argentina", isCorrect: true},
+        {c: "Costa Rica", isCorrect: false},
+        {d: "Brazil", isCorrect: false},
+    ],
+    },
+
+    {
+    country: "assets/images/Flag_of_Laos.svg.png",
+    answers: [
+        {a: "Bhutan", isCorrect: false},
+        {b: "Nepal", isCorrect: false},
+        {c: "Laos", isCorrect: true},
+        {d: "Thailand", isCorrect: false},
+    ],
+    },
+    
 ]
 
-
-let secondsLeft = 241;
+secondsLeft = 241;
 
 function countdown(){
     let timerInterval = setInterval(function(){
@@ -108,36 +128,171 @@ function countdown(){
         if(secondsLeft === 0) {
             clearInterval(timerInterval);
             mainEl.textContent = " "
+            endStats()
         }
     }, 1000);
-    pickRandom();
+    init();
+}
+
+function init() {
+    let storedCount = JSON.parse(localStorage.getItem("count"))
+    if (storedCount != null) {
+        count = storedCount
+    }
+    pickRandom()
 }
 
 function pickRandom(){
+    let theAnswer = true;
+    
+    let nextBtn = document.createElement("button")
+    nextBtn.textContent = "Next Flag"
+    let head = document.createElement("p")
+    head.textContent = "Name this flag:";
+    
     mainEl.textContent = " ";
+
     randomFlag = imgSrc[Math.floor(Math.random() * imgSrc.length)]
+    console.log(randomFlag)
+    localStorage.setItem("count", JSON.stringify(randomFlag.country))
+
+    // adds the image
     let imgEl = document.createElement("img");
     imgEl.setAttribute("src", randomFlag.country);
-    imgEl.setAttribute("style", "width: 300px;");
+    imgEl.setAttribute("style", "width: 400px;");
     mainEl.appendChild(imgEl);
     
-    startGame()
+    // adds 
+    mainEl.appendChild(head);
+    let op1 = document.createElement("button");
+    op1.textContent = randomFlag.answers[0].a
+    mainEl.appendChild(op1);
+    op1.setAttribute("style", "font-size: 30px; margin: 1%;")
+
+    op1.addEventListener("click", function(){
+        let response1 = undefined;
+        response1 = randomFlag.answers[0].isCorrect
+        if (response1 === theAnswer) {
+            mainEl.textContent = " ";
+            mainEl.textContent = "CORRECT!";
+            nextBtn.setAttribute("style", "font-size: 30px;")
+            mainEl.appendChild(nextBtn)
+            nextBtn.addEventListener("click", function(){
+                
+                pickRandom()
+            })
+            
+        }
+        else {
+            mainEl.textContent = " ";
+            mainEl.textContent = "bruh";
+            nextBtn.setAttribute("style", "font-size: 30px;")
+            mainEl.appendChild(nextBtn)
+            nextBtn.addEventListener("click", function(){
+                
+                pickRandom()
+            })
+        }
+    })
+
+    let op2 = document.createElement("button");
+    op2.textContent = randomFlag.answers[1].b
+    mainEl.appendChild(op2);
+    op2.setAttribute("style", "font-size: 30px; margin: 1%;")
+   
+    op2.addEventListener("click", function(){
+        let response2 = undefined;
+        response2 = randomFlag.answers[1].isCorrect
+        if (response2 === theAnswer) {
+            mainEl.textContent = " ";
+            mainEl.textContent = "CORRECT!";
+            nextBtn.setAttribute("style", "font-size: 30px;")
+            mainEl.appendChild(nextBtn)
+            nextBtn.addEventListener("click", function(){
+                
+                pickRandom()
+            })
+        }
+        else {
+            mainEl.textContent = " ";
+            mainEl.textContent = "bruh";
+            nextBtn.setAttribute("style", "font-size: 30px;")
+            mainEl.appendChild(nextBtn)
+            nextBtn.addEventListener("click", function(){
+                
+                pickRandom()
+            })
+        }
+    })
+    
+    let op3 = document.createElement("button");
+    op3.textContent = randomFlag.answers[2].c
+    mainEl.appendChild(op3);
+    op3.setAttribute("style", "font-size: 30px; margin: 1%;")
+
+    op3.addEventListener("click", function(){
+        let response3 = undefined;
+        response3 = randomFlag.answers[2].isCorrect
+        if (response3 === theAnswer) {
+            mainEl.textContent = " ";
+            mainEl.textContent = "CORRECT!";
+            nextBtn.setAttribute("style", "font-size: 30px;")
+            mainEl.appendChild(nextBtn)
+            nextBtn.addEventListener("click", function(){
+                
+                pickRandom()
+            })
+        }
+        else {
+            mainEl.textContent = " ";
+            mainEl.textContent = "bruh";
+            nextBtn.setAttribute("style", "font-size: 30px;")
+            mainEl.appendChild(nextBtn)
+            nextBtn.addEventListener("click", function(){
+                
+                pickRandom()
+            })
+        }
+    })
+    
+    let op4 = document.createElement("button");
+    op4.textContent = randomFlag.answers[3].d
+    mainEl.appendChild(op4);
+    op4.setAttribute("style", "font-size: 30px; margin: 1%;")
+
+    op4.addEventListener("click", function(){
+        let response4 = undefined;
+        response4 = randomFlag.answers[3].isCorrect
+        if (response4 === theAnswer) {
+            mainEl.textContent = " ";
+            mainEl.textContent = "CORRECT!";
+            nextBtn.setAttribute("style", "font-size: 30px;")
+            mainEl.appendChild(nextBtn)
+            nextBtn.addEventListener("click", function(){
+                
+                pickRandom()
+            })
+        }
+        else {
+            mainEl.textContent = " ";
+            mainEl.textContent = "bruh";
+            nextBtn.setAttribute("style", "font-size: 30px;")
+            mainEl.appendChild(nextBtn)
+            nextBtn.addEventListener("click", function(){
+                
+                pickRandom()
+            })
+        }
+    })
+    
+    endStats()
 }
 
-function startGame(){
-    let op1 = document.createElement("button");
-    op1.textContent = randomFlag.answers[0]
-    mainEl.appendChild(op1);
-    let op2 = document.createElement("button");
-    op2.textContent = randomFlag.answers[1]
-    mainEl.appendChild(op2);
-    let op3 = document.createElement("button");
-    op3.textContent = randomFlag.answers[2]
-    mainEl.appendChild(op3);
-    let op4 = document.createElement("button");
-    op4.textContent = randomFlag.answers[3]
-    mainEl.appendChild(op4);
-    console.log(randomFlag.answers)
+let correct
+let incorrect
+
+function endStats(){
+    
 }
 
 btnEl.addEventListener("click", function(){
