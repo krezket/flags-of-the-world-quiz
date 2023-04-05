@@ -129,7 +129,12 @@ let imgSrc = [
     
 ]
 
-secondsLeft = 241;
+const copyArray = [];
+for (let i=0; i < imgSrc.length; i++) {
+  copyArray.push(imgSrc[i]);
+}
+
+secondsLeft = 121;
 
 function countdown(){
     let timerInterval = setInterval(function(){
@@ -141,37 +146,35 @@ function countdown(){
             endStats()
         }
     }, 1000);
-    init();
+}
+
+function endStats(){
+    mainEl.textContent = " "
+    mainEl.textContent = "Stats:"
+    console.log("I am here")
 }
 
 function init() {
-    let storedCount = JSON.parse(localStorage.getItem("count"))
-    if (storedCount != null) {
-        count = storedCount
-    }
-    // shuffle()
-    pickRandom()
+    countdown()
+    startGame()
 }
 
+function startGame(){
 
-// function shuffle(){
-//     randomFlag = imgSrc.sort(() => 0.5 - Math.random())
-//     console.log("this", randomFlag)
-// }
-
-function pickRandom(){
     let theAnswer = true;
-    
     let nextBtn = document.createElement("button")
     nextBtn.textContent = "Next Flag"
     let head = document.createElement("p")
     head.textContent = "Name this flag:";
     
     mainEl.textContent = " ";
+    console.log(copyArray.length)
 
-    randomFlag = imgSrc[Math.floor(Math.random() * imgSrc.length)]
+    let randomFlagIndex = Math.floor(Math.random() * copyArray.length)
+    randomFlag = copyArray[randomFlagIndex]
+    copyArray.splice(randomFlagIndex, 1)
     console.log("this",randomFlag)
-    localStorage.setItem("count", JSON.stringify(randomFlag.country))
+    // localStorage.setItem("count", JSON.stringify(randomFlag.country))
 
     // adds the image
     let imgEl = document.createElement("img");
@@ -195,8 +198,14 @@ function pickRandom(){
             nextBtn.setAttribute("style", "font-size: 30px; margin-top: 20px;")
             mainEl.appendChild(nextBtn)
             nextBtn.addEventListener("click", function(){
-                
-                pickRandom()
+
+                if (copyArray.length === 0) {
+                    secondsLeft = 1;
+                    endStats();
+                }
+                else {
+                    startGame();
+                }
             })
             
         }
@@ -208,7 +217,13 @@ function pickRandom(){
             mainEl.appendChild(nextBtn)
             nextBtn.addEventListener("click", function(){
                 
-                pickRandom()
+                if (copyArray.length === 0) {
+                    secondsLeft = 1;
+                    endStats();
+                }
+                else {
+                    startGame();
+                }
             })
         }
     })
@@ -228,7 +243,13 @@ function pickRandom(){
             mainEl.appendChild(nextBtn)
             nextBtn.addEventListener("click", function(){
                 
-                pickRandom()
+                if (copyArray.length === 0) {
+                    secondsLeft = 1;
+                    endStats();
+                }
+                else {
+                    startGame();
+                }
             })
         }
         else {
@@ -239,7 +260,13 @@ function pickRandom(){
             mainEl.appendChild(nextBtn)
             nextBtn.addEventListener("click", function(){
                 
-                pickRandom()
+                if (copyArray.length === 0) {
+                    secondsLeft = 1;
+                    endStats();
+                }
+                else {
+                    startGame();
+                }
             })
         }
     })
@@ -259,7 +286,13 @@ function pickRandom(){
             mainEl.appendChild(nextBtn)
             nextBtn.addEventListener("click", function(){
                 
-                pickRandom()
+                if (copyArray.length === 0) {
+                    secondsLeft = 1;
+                    endStats();
+                }
+                else {
+                    startGame();
+                }
             })
         }
         else {
@@ -270,7 +303,13 @@ function pickRandom(){
             mainEl.appendChild(nextBtn)
             nextBtn.addEventListener("click", function(){
                 
-                pickRandom()
+                if (copyArray.length === 0) {
+                    secondsLeft = 1;
+                    endStats();
+                }
+                else {
+                    startGame();
+                }
             })
         }
     })
@@ -290,7 +329,13 @@ function pickRandom(){
             mainEl.appendChild(nextBtn)
             nextBtn.addEventListener("click", function(){
                 
-                pickRandom()
+                if (copyArray.length === 0) {
+                    secondsLeft = 1;
+                    endStats();
+                }
+                else {
+                    startGame();
+                }
             })
         }
         else {
@@ -301,21 +346,18 @@ function pickRandom(){
             mainEl.appendChild(nextBtn)
             nextBtn.addEventListener("click", function(){
                 
-                pickRandom()
+                if (copyArray.length === 0) {
+                    secondsLeft = 1;
+                    endStats();
+                }
+                else {
+                    startGame();
+                }
             })
         }
     })
-    
-    endStats()
-}
-
-let correct
-let incorrect
-
-function endStats(){
-    
 }
 
 btnEl.addEventListener("click", function(){
-    countdown();
+    init();
 })
